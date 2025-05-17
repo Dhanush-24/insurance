@@ -37,7 +37,7 @@ const Navbar = () => {
     }
 
     try {
-      const res = await axios.get(`http://localhost:5001/api/payment/payment-details/${user.mobile}`);
+      const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/payment/payment-details/${user.mobile}`);
       const payments = res.data.data || [];
 
       if (payments.length === 0) {

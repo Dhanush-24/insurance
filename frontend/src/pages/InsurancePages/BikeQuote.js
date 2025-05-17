@@ -23,7 +23,7 @@ const BikeQuote = () => {
       const fetchPlans = async () => {
         try {
           setLoading(true);
-          const res = await axios.get("http://localhost:5001/api/bike/plans", {
+          const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/bike/plans`, {
             params: { bikeNumber },
           });
 
@@ -54,7 +54,7 @@ const BikeQuote = () => {
     setLoadingPlanId(planId);
     setMessage(null);
     try {
-      const response = await axios.post("http://localhost:5001/api/bike/selectplan", {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/bike/selectplan`, {
         bikeNumber,
         planId,
       });

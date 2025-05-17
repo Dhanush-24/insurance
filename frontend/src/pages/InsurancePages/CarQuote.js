@@ -23,7 +23,7 @@ const CarQuote = () => {
       const fetchPlans = async () => {
         try {
           setLoading(true);
-          const res = await axios.get("http://localhost:5001/api/car/plans", {
+          const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/car/plans`, {
             params: { carNumber },
           });
 
@@ -54,7 +54,7 @@ const CarQuote = () => {
     setLoadingPlanId(planId);
     setMessage(null);
     try {
-      const response = await axios.post("http://localhost:5001/api/car/selectplan", {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/car/selectplan`, {
         carNumber,
         planId,
       });

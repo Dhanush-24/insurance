@@ -9,7 +9,7 @@ const DeletePolicy = ({ token, policyType, fetchPolicies }) => {
       alert('Please enter a policy ID.');
       return;
     }
-    axios.delete(`http://localhost:5001/api/admin/policies/${policyType}/${policyIdToDelete}`, {
+    axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/admin/policies/${policyType}/${policyIdToDelete}`, {
       headers: { Authorization: `Bearer ${token}` },
     }).then(() => {
       fetchPolicies(policyType); // Refresh the policy list

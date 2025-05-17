@@ -8,7 +8,7 @@ const GetUsers = ({ token }) => {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5001/api/admin/users', {
+      const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/admin/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

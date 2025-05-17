@@ -21,7 +21,7 @@ const InvestmentInsuranceCard = () => {
   // Fetch top investment policies
   useEffect(() => {
     axios
-      .get('http://localhost:5001/api/investmentPolicy/plans')
+      .get(`${process.env.REACT_APP_API_BASE_URL}/api/investmentPolicy/plans`)
       .then((res) => {
         if (res.data && Array.isArray(res.data.data)) {
           setInvestmentPlans(res.data.data);
@@ -40,7 +40,7 @@ const InvestmentInsuranceCard = () => {
   const handleNext = async () => {
     if (showStep === 2) {
       try {
-        await axios.post('http://localhost:5001/api/investmentPolicy/create', formData);
+        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/investmentPolicy/create`, formData);
         navigate('/investment-quote', { state: { formData, selectedPlanId } });
       } catch (err) {
         console.error(err);

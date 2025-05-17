@@ -25,7 +25,7 @@ const LoginModal = ({ show, handleClose, onLogin }) => {
     setErrorMessage('');
 
     try {
-      const response = await axios.post('http://localhost:5001/api/auth/send-otp', { mobile });
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/auth/send-otp`, { mobile });
 
       if (response.status === 200) {
         console.log("OTP Sent Successfully");

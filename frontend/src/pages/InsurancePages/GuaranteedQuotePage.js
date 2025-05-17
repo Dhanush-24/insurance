@@ -12,7 +12,7 @@ const GuaranteedQuotePage = () => {
 
   const handleSelectPlan = async (planId) => {
     try {
-      await axios.post('http://localhost:5001/api/guarented-policy/select', {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/guarented-policy/select`, {
         ...user,
         planId,
       });

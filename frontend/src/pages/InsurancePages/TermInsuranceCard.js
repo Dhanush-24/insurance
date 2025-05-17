@@ -21,7 +21,7 @@ const TermInsuranceCard = () => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/term/plans');
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/term/plans`);
         setPlans(response.data.data); // Store the fetched plans in the state
       } catch (err) {
         console.error('Error fetching term plans:', err);
@@ -34,7 +34,7 @@ const TermInsuranceCard = () => {
     if (showStep === 2) {
       try {
         // Step 1: Create the term policy
-        await axios.post('http://localhost:5001/api/term/create', formData);
+        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/term/create`, formData);
 
         // Step 2: Navigate with data
         navigate('/term-quote', { state: { formData, plans } });

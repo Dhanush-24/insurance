@@ -36,7 +36,7 @@ const UserDashboard = () => {
     if (!validTypes.includes(type)) return alert("Invalid policy type.");
 
     try {
-      const { data } = await axios.post('http://localhost:5001/api/payment/create-order', { type, mobile: userMobile });
+      const { data } = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/payment/create-order`, { type, mobile: userMobile });
       const { order } = data;
 
       const options = {
@@ -48,7 +48,7 @@ const UserDashboard = () => {
         order_id: order.id,
         handler: async function (response) {
           alert('Payment successful!');
-          await axios.post('http://localhost:5001/api/payment/verify-payment', {
+          await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/payment/verify-payment`, {
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_order_id: response.razorpay_order_id,
             razorpay_signature: response.razorpay_signature,
@@ -72,7 +72,7 @@ const UserDashboard = () => {
   useEffect(() => {
     if (!user?.mobile || user.mobile !== mobile) return navigate('/');
 
-    axios.get(`http://localhost:5001/api/auth/dashboard/${mobile}`)
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/auth/dashboard/${mobile}`)
       .then((res) => {
         const userData = res.data.user || res.data;
         setUserDetails(userData);
@@ -87,7 +87,7 @@ const UserDashboard = () => {
         };
 
         Object.entries(endpoints).forEach(([type, path]) => {
-          axios.get(`http://localhost:5001/api/${path}/${userData.mobile}`)
+          axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/${path}/${userData.mobile}`)
             .then((res) => {
               setSelectedPolicies((prev) => ({
                 ...prev,
@@ -96,7 +96,7 @@ const UserDashboard = () => {
             });
         });
 
-        axios.get(`http://localhost:5001/api/payment/payment-details/${userData.mobile}`)
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/payment/payment-details/${userData.mobile}`)
           .then((res) => setPaymentHistory(res.data.data));
       })
       .catch((err) => console.error('Failed to fetch user details:', err));

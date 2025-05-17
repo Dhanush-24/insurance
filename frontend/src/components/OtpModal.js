@@ -13,7 +13,7 @@ const OtpModal = ({ show, handleClose, mobile, onLogin }) => {
     setLoading(true);
     setError('');
     try {
-      const res = await axios.post('http://localhost:5001/api/auth/verify-otp', { mobile, otp });
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/auth/verify-otp`, { mobile, otp });
       if (res.status === 200) {
         setShowAddDetails(true);
         handleClose();

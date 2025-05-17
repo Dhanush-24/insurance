@@ -23,7 +23,7 @@ const HealthInsuranceCard = () => {
   // Fetch Top Health Plans
   useEffect(() => {
     axios
-      .get('http://localhost:5001/api/health/plans')
+      .get(`${process.env.REACT_APP_API_BASE_URL}/api/health/plans`)
       .then((res) => {
         if (res.data && Array.isArray(res.data.data)) {
           setTopPlans(res.data.data);
@@ -45,7 +45,7 @@ const HealthInsuranceCard = () => {
     }
     if (showStep === 3) {
       try {
-        await axios.post('http://localhost:5001/api/health/create', formData);
+        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/health/create`, formData);
         navigate('/health-quote', { state: { userDetails: formData } });
       } catch (err) {
         console.error(err);

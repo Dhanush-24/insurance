@@ -10,7 +10,7 @@ const HealthQuote = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5001/api/health/plans')
+      .get(`${process.env.REACT_APP_API_BASE_URL}/api/health/plans`)
       .then(res => setPlans(res.data.data))
       .catch(err => {
         console.error('Error fetching health plans:', err);
@@ -20,7 +20,7 @@ const HealthQuote = () => {
 
   const handleSelect = async (planId) => {
     try {
-      await axios.post('http://localhost:5001/api/health/select', {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/health/select`, {
         ...state.userDetails,
         planId,
       });

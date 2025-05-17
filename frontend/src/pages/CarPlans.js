@@ -18,7 +18,7 @@ const CarPlans = () => {
         if (passedPlans.length) {
           setPlans(passedPlans.sort((a, b) => a.premium - b.premium));
         } else {
-          const res = await axios.get("http://localhost:5001/api/car/plans", {
+          const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/car/plans`, {
             params: { carNumber },
           });
           const data = Array.isArray(res.data) ? res.data : res.data.plans;
@@ -37,7 +37,7 @@ const CarPlans = () => {
 
   const handleSelect = async (planId) => {
     try {
-      const res = await axios.post("http://localhost:5001/api/car/selectplan", { planId });
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/car/selectplan`, { planId });
       alert(res.data.message || "Policy selected successfully!");
     } catch (err) {
       console.error("Selection failed:", err);

@@ -13,7 +13,7 @@ const Dashboard = ({ mobile }) => {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/api/auth/dashboard/${mobile}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/auth/dashboard/${mobile}`);
         setUser(response.data.user);
         setPolicies(response.data.policies || []);
       } catch (err) {

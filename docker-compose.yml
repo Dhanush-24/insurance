@@ -6,6 +6,8 @@ services:
     build: ./frontend
     ports:
       - "3000:3000"
+    environment:
+      - REACT_APP_API_BASE_URL=http://localhost:5001
     depends_on:
       - backend
     networks:
@@ -16,11 +18,11 @@ services:
     container_name: backend-container
     build: ./backend
     ports:
-      - "5000:5000"
+      - "5001:5001"
     environment:
-      MONGO_URI: mongodb://mongo-container:27017/insuranceDekho
-      JWT_SECRET: abcde123  
-      PORT: 5000
+      MONGO_URI=mongodb://mongo-container:27017/insuranceDekho
+      JWT_SECRET=abcde123  
+      PORT=5001
     depends_on:
       - mongo
     networks:

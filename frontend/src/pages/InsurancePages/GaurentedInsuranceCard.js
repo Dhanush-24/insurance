@@ -16,7 +16,7 @@ const GuaranteedInsuranceCard = () => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/guarented-policy/plans');
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/guarented-policy/plans`);
         setPlans(response.data.plans || []);
       } catch (err) {
         console.error('Error fetching plans:', err);
@@ -38,7 +38,7 @@ const GuaranteedInsuranceCard = () => {
 
     try {
       // Send the user's details along with the selected plan ID
-      await axios.post('http://localhost:5001/api/guarented-policy/create', formData);
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/guarented-policy/create`, formData);
 
       // Navigate to the Guaranteed Quote page with user and plan details
       navigate('/guaranteed-quote', {
