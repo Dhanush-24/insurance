@@ -14,7 +14,7 @@ const InvestmentQuote = () => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const res = await axios.get('http://localhost:5001/api/investmentPolicy/plans');
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/investmentPolicy/plans`);
         setPlans(res.data.data);
       } catch (err) {
         console.error('Error fetching plans:', err);
@@ -30,7 +30,7 @@ const InvestmentQuote = () => {
 
   const handleSelectPlan = async (planId) => {
     try {
-      await axios.post('http://localhost:5001/api/investmentPolicy/selectPlan', {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/investmentPolicy/selectPlan`, {
         ...formData,
         planId,
       });

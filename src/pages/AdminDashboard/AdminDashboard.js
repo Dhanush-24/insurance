@@ -25,7 +25,7 @@ const AdminDashboard = () => {
     if (!token) {
       navigate('/admin/login');
     } else {
-      axios.get('http://localhost:5001/api/admin/dashboard', {
+      axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/admin/dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       }).then(res => setAdminInfo(res.data))
         .catch(console.error);
@@ -36,7 +36,7 @@ const AdminDashboard = () => {
     const type = prompt('Enter policy type (car, bike, health, investment, guaranteed, term):');
     if (!type) return;
 
-    axios.get(`http://localhost:5001/api/admin/policies/${type}`, {
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/admin/policies/${type}`, {
       headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
       setPolicies(res.data);
@@ -53,7 +53,7 @@ const AdminDashboard = () => {
 
     if (!type || !planId) return;
 
-    axios.delete(`http://localhost:5001/api/admin/policies/${type}/${planId}`, {
+    axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/admin/policies/${type}/${planId}`, {
       headers: { Authorization: `Bearer ${token}` },
     }).then(() => {
       alert('Policy deleted successfully!');
@@ -65,7 +65,7 @@ const AdminDashboard = () => {
   };
 
   const handleGetUsers = () => {
-    axios.get('http://localhost:5001/api/admin/users', {
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/admin/users`, {
   headers: { Authorization: `Bearer ${token}` },
 })
 .then(res => {
@@ -82,7 +82,7 @@ const AdminDashboard = () => {
   const handleAddPolicy = () => {
     try {
       const parsedData = JSON.parse(newPolicyData);
-      axios.post(`http://localhost:5001/api/admin/policies/${newPolicyType}`, parsedData, {
+      axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/admin/policies/${newPolicyType}`, parsedData, {
         headers: { Authorization: `Bearer ${token}` },
       }).then(() => {
         alert('Policy added successfully!');
@@ -102,7 +102,7 @@ const AdminDashboard = () => {
     try {
       const parsedData = JSON.parse(updatePolicyData);
       axios.put(
-        `http://localhost:5001/api/admin/policies/${updatePolicyType}/${updatePolicyId}`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/admin/policies/${updatePolicyType}/${updatePolicyId}`,
         parsedData,
         {
           headers: { Authorization: `Bearer ${token}` },

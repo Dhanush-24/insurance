@@ -23,7 +23,7 @@ const AdminRegister = () => {
 
     try {
       const newAdmin = { email, password, name, gender, age };
-      await axios.post('http://localhost:5001/api/admin/register', newAdmin);
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/admin/register`, newAdmin);
       navigate('/admin/login');
     } catch (error) {
       setErrorMessage('Error registering admin. Please try again.');

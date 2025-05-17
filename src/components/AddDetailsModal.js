@@ -20,7 +20,7 @@ const AddDetailsModal = ({ show, handleClose, mobile, onLogin }) => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5001/api/auth/add-details', {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/auth/add-details`, {
         name,
         gender,
         dob,

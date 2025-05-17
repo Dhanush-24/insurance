@@ -17,7 +17,7 @@ const AdvisorsListPage = () => {
 
   const fetchAdvisors = async () => {
     try {
-      const res = await axios.get(`http://localhost:5001/api/advisors`, {
+      const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/advisors`, {
         params: { ...filters, expertise: filters.expertise.join(',') },
       });
       setAdvisors(res.data);

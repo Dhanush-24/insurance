@@ -13,19 +13,19 @@ const CarInsuranceCard = () => {
   
     try {
       // 1. Check if car number already exists
-      const checkRes = await axios.post('http://localhost:5001/api/car/check-existing', {
+      const checkRes = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/car/check-existing`, {
         carNumber,
       });
   
       // 2. Save car number if it doesn't exist
       if (!checkRes.data.exists) {
-        await axios.post('http://localhost:5001/api/car/savenumber', {
+        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/car/savenumber`, {
           carNumber,
         });
       }
   
       // 3. Fetch car insurance plans
-      const plansRes = await axios.get('http://localhost:5001/api/car/plans');
+      const plansRes = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/car/plans`);
   
       // 4. Navigate to car-quote with data
       navigate('/car-quote', {

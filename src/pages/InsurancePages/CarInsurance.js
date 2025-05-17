@@ -27,7 +27,7 @@ const CarInsuranceCard = () => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/api/car/plans");
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/car/plans`);
         setPlans(Array.isArray(response.data.data) ? response.data.data : []);
       } catch (error) {
         console.error("Failed to fetch car insurance plans:", error);
@@ -71,7 +71,7 @@ const CarInsuranceCard = () => {
     }
 
     try {
-      await axios.post("http://localhost:5001/api/car/details", {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/car/details`, {
         carNumber,
         carBrand,
         carModel,
@@ -100,7 +100,7 @@ const CarInsuranceCard = () => {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:5001/api/car/user-info", {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/car/user-info`, {
         fullName,
         mobileNumber,
         carNumber,

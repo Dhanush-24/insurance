@@ -25,7 +25,7 @@ const BikeInsuranceCard = () => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const res = await axios.get("http://localhost:5001/api/bike/plans");
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/bike/plans`);
         setPlans(Array.isArray(res.data.data) ? res.data.data : []);
       } catch (err) {
         console.error("Error fetching plans:", err);
@@ -55,7 +55,7 @@ const BikeInsuranceCard = () => {
       return alert("Fill all bike details");
     }
     try {
-      await axios.post("http://localhost:5001/api/bike/details", {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/bike/details`, {
         bikeNumber, bikeBrand, bikeModel, registrationYear, registrationCity,
       });
       setFormStep(3);
@@ -72,7 +72,7 @@ const BikeInsuranceCard = () => {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:5001/api/bike/userInfo", {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/bike/userInfo`, {
         fullName, mobileNumber, bikeNumber,
       });
       navigate("/bike-quote", {
